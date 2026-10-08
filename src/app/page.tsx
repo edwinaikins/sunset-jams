@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import SiteNav from "@/components/SiteNav";
 import Hero from "@/components/Hero";
 import ArcSection from "@/components/ArcSection";
@@ -10,24 +11,34 @@ import VipSection from "@/components/VipSection";
 import DetailsSection from "@/components/DetailsSection";
 import ContactSection from "@/components/ContactSection";
 import SiteFooter from "@/components/SiteFooter";
+import { getSiteContent } from "@/lib/content-store";
 
-export default function HomePage() {
+// Content is edited from /admin/content, so render on every request.
+export const dynamic = "force-dynamic";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const c = await getSiteContent();
+  return { title: c.meta.title, description: c.meta.description };
+}
+
+export default async function HomePage() {
+  const c = await getSiteContent();
   return (
     <>
-      <SiteNav />
-      <Hero />
+      <SiteNav c={c.nav} />
+      <Hero c={c.hero} />
       <main>
-        <ArcSection />
-        <WhySection />
-        <AboutSection />
-        <FeaturesSection />
-        <RsvpSection />
-        <SaveSection />
-        <VipSection />
-        <DetailsSection />
-        <ContactSection />
+        <ArcSection c={c.arc} />
+        <WhySection c={c.why} />
+        <AboutSection c={c.about} />
+        <FeaturesSection c={c.features} />
+        <RsvpSection c={c.rsvp} />
+        <SaveSection c={c.save} />
+        <VipSection c={c.vip} />
+        <DetailsSection c={c.details} />
+        <ContactSection c={c.contact} />
       </main>
-      <SiteFooter />
+      <SiteFooter c={c.footer} />
     </>
   );
 }

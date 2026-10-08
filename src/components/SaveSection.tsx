@@ -1,26 +1,30 @@
-import Image from "next/image";
+import type { SiteContent } from "@/lib/content";
+import { paragraphs, safeUrl } from "@/lib/content";
 
-export default function SaveSection() {
+export default function SaveSection({ c }: { c: SiteContent["save"] }) {
+  const img = safeUrl(c.imageUrl);
   return (
     <section className="save-section">
       <div className="wrap">
         <div className="split reverse">
-          <div className="poster-card">
-            <Image src="/cup-poster.jpg" alt="Sunset Jams — save the date" width={1000} height={1501} />
-            <div className="poster-tag">
-              <span>Homecoming edition</span>
-              <strong>Jam Grove</strong>
+          {img && (
+            <div className="poster-card">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={img} alt={c.imageAlt} width={1000} height={1501} style={{ height: "auto" }} />
+              <div className="poster-tag">
+                <span>{c.tagSmall}</span>
+                <strong>{c.tagStrong}</strong>
+              </div>
             </div>
-          </div>
+          )}
           <div>
-            <span className="eyebrow">Save it, share it</span>
+            <span className="eyebrow">{c.eyebrow}</span>
             <h2>
-              Where sunset <span className="script">meets the sound.</span>
+              {c.heading} <span className="script">{c.headingScript}</span>
             </h2>
-            <p>
-              Screenshot the flyer, drop it in your group chat, tag whoever&rsquo;s coming with you. The venue&rsquo;s
-              still under wraps, but the date is locked — Sunday, 6 December, from 1PM till late.
-            </p>
+            {paragraphs(c.body).map((p, i) => (
+              <p key={i}>{p}</p>
+            ))}
           </div>
         </div>
       </div>

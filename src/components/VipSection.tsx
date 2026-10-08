@@ -1,10 +1,11 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import type { SiteContent } from "@/lib/content";
 
 type Status = "idle" | "pending" | "ok" | "err";
 
-export default function VipSection() {
+export default function VipSection({ c }: { c: SiteContent["vip"] }) {
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState("");
 
@@ -44,14 +45,12 @@ export default function VipSection() {
     <section className="vip-section" id="vip">
       <div className="wrap">
         <div className="section-head">
-          <h2>VIP tables &amp; vendor spots</h2>
-          <p>Want a reserved table, or a stall at Sunset Jams? Tell us what you need and we&rsquo;ll follow up.</p>
+          <h2>{c.heading}</h2>
+          <p>{c.intro}</p>
         </div>
         <div className="form-card">
           {status === "ok" ? (
-            <p className="form-status ok">
-              Request received. We&rsquo;ll reach out on the contact details you gave us to confirm availability.
-            </p>
+<p className="form-status ok">{c.success}</p>
           ) : (
             <form onSubmit={onSubmit}>
               <div className="form-grid two">
@@ -90,9 +89,9 @@ export default function VipSection() {
               </div>
               <div className="form-foot">
                 <button className="btn btn-primary" type="submit" disabled={status === "pending"}>
-                  {status === "pending" ? "Sending…" : "Send request"}
+                  {status === "pending" ? "Sending…" : c.buttonLabel}
                 </button>
-                <p className="form-note">This isn&rsquo;t a payment — it&rsquo;s a request. We&rsquo;ll confirm details with you directly.</p>
+                {c.note && <p className="form-note">{c.note}</p>}
               </div>
               {status === "err" && <p className="admin-field-error">{error}</p>}
             </form>

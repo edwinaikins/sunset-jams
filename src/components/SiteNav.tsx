@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import type { SiteContent } from "@/lib/content";
 
-export default function SiteNav() {
+export default function SiteNav({ c }: { c: SiteContent["nav"] }) {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -15,10 +16,10 @@ export default function SiteNav() {
   return (
     <nav className={`site-nav${scrolled ? " scrolled" : ""}`}>
       <div className="brand">
-        <span className="brand-mark">JG</span>
+        <span className="brand-mark">{c.brandMark}</span>
         <span>
-          JAM GROVE ENTERTAINMENT
-          <small>Sunset Jams &middot; Vol. 1</small>
+          {c.brandName}
+          <small>{c.brandSub}</small>
         </span>
       </div>
       <div className="nav-links">
@@ -28,7 +29,7 @@ export default function SiteNav() {
         <a href="#contact">Contact</a>
       </div>
       <a className="nav-cta" href="#rsvp">
-        RSVP free
+        {c.ctaLabel}
       </a>
     </nav>
   );

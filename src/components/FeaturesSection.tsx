@@ -1,35 +1,21 @@
 import { ForkKnifeIcon, CupIcon, PeopleIcon } from "./icons";
 
-const FEATURES = [
-  {
-    icon: <ForkKnifeIcon />,
-    title: "Delicious food",
-    body: "Tasty bites all day, from the first plate at 1PM to whatever you're craving after dark.",
-  },
-  {
-    icon: <CupIcon />,
-    title: "Refreshing drinks",
-    body: "Cold drinks, strong vibes — the bar keeps pace with the sun going down and the set going up.",
-  },
-  {
-    icon: <PeopleIcon />,
-    title: "Amazing energy",
-    body: "Great people, great memories — the kind of room that turns strangers into your new plug.",
-  },
-];
+import type { SiteContent } from "@/lib/content";
 
-export default function FeaturesSection() {
+const ICONS = [<ForkKnifeIcon key="f" />, <CupIcon key="c" />, <PeopleIcon key="p" />];
+
+export default function FeaturesSection({ c }: { c: SiteContent["features"] }) {
   return (
     <section className="features-section">
       <div className="wrap">
         <div className="section-head">
-          <h2>What&rsquo;s waiting for you</h2>
-          <p>Three things Sunset Jams never runs short on.</p>
+          <h2>{c.heading}</h2>
+          <p>{c.intro}</p>
         </div>
         <div className="features-grid">
-          {FEATURES.map((f) => (
-            <div className="feature-card" key={f.title}>
-              <div className="feature-icon">{f.icon}</div>
+          {c.items.map((f, i) => (
+            <div className="feature-card" key={i}>
+              <div className="feature-icon">{ICONS[i % ICONS.length]}</div>
               <h3>{f.title}</h3>
               <p>{f.body}</p>
             </div>

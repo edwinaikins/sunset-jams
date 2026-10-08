@@ -1,32 +1,31 @@
-import Image from "next/image";
+import type { SiteContent } from "@/lib/content";
+import { paragraphs, safeUrl } from "@/lib/content";
 
-export default function AboutSection() {
+export default function AboutSection({ c }: { c: SiteContent["about"] }) {
+  const img = safeUrl(c.imageUrl);
   return (
     <section className="about-section" id="about">
       <div className="wrap">
         <div className="split">
           <div>
-            <span className="eyebrow">You are invited</span>
+            <span className="eyebrow">{c.eyebrow}</span>
             <h2>
-              Where sunset <span className="script">meets the sound.</span>
+              {c.heading} <span className="script">{c.headingScript}</span>
             </h2>
-            <p>
-              Sunset Jams Vol. 1: The Homecoming is Jam Grove Entertainment&rsquo;s all-new open-air experience — a
-              full day-to-night gathering built around good music, delicious food, great people and energy that
-              doesn&rsquo;t quit.
-            </p>
-            <p>
-              It&rsquo;s a homecoming in the truest sense: back to the roots, back to the vibes, back to the
-              community that made the sound worth chasing in the first place.
-            </p>
+            {paragraphs(c.body).map((p, i) => (
+              <p key={i}>{p}</p>
+            ))}
           </div>
-          <div className="poster-card">
-            <Image src="/hero-poster.jpg" alt="Sunset Jams official flyer" width={1600} height={1143} />
-            <div className="poster-tag">
-              <span>Official flyer</span>
-              <strong>#SUNSETJAMS</strong>
+          {img && (
+            <div className="poster-card">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={img} alt={c.imageAlt} width={1600} height={1143} style={{ height: "auto" }} />
+              <div className="poster-tag">
+                <span>{c.tagSmall}</span>
+                <strong>{c.tagStrong}</strong>
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </section>

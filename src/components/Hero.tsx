@@ -1,4 +1,5 @@
-import Image from "next/image";
+import type { SiteContent } from "@/lib/content";
+import { safeUrl } from "@/lib/content";
 import { CalendarIcon, ClockIcon, PinIcon } from "./icons";
 
 const PARTICLES = [
@@ -14,10 +15,20 @@ const PARTICLES = [
   { l: "95.1%", s: "3.6px", d: "9.0s", delay: "9.8s", x: "-24px", c: "var(--accent-2)" },
 ];
 
-export default function Hero() {
+export default function Hero({ c }: { c: SiteContent["hero"] }) {
+  const words = c.marquee
+    .split(",")
+    .map((w) => w.trim())
+    .filter(Boolean);
+  const bg = safeUrl(c.backgroundUrl);
+  const logo = safeUrl(c.logoUrl);
   return (
     <header className="hero">
-      <div className="hero-bgimg" aria-hidden="true" />
+      <div
+        className="hero-bgimg"
+        aria-hidden="true"
+        style={bg ? { backgroundImage: `url(${JSON.stringify(bg)})` } : undefined}
+      />
       <div className="hero-particles" aria-hidden="true">
         {PARTICLES.map((p, i) => (
           <span
@@ -36,66 +47,56 @@ export default function Hero() {
         ))}
       </div>
       <div className="hero-inner">
-        <span className="eyebrow">Jam Grove Entertainment presents &middot; The all-new open-air experience</span>
+        <span className="eyebrow">{c.eyebrow}</span>
         <h1>
-          <Image
-            className="hero-logo"
-            src="/logo.png"
-            alt="Sunset Jams — where sunset meets the sound"
-            width={900}
-            height={362}
-            priority
-          />
+          {logo ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img className="hero-logo" src={logo} alt={c.logoAlt} width={900} height={362} style={{ height: "auto" }} />
+          ) : (
+            c.logoAlt
+          )}
         </h1>
         <p className="hero-sub">
-          Volume 1 <span className="script">— The Homecoming</span>
+          {c.subtitle} <span className="script">{c.subtitleScript}</span>
         </p>
-        <p className="hero-line">
-          Back to the roots. Back to the vibes. A day-to-night open-air experience of music, food and community,
-          right here in Accra.
-        </p>
+<p className="hero-line">{c.line}</p>
         <div className="info-strip">
           <div className="info-cell">
             <CalendarIcon />
             <div>
               <div className="label">Date</div>
-              <div className="value">Sun, 06 Dec 2026</div>
+              <div className="value">{c.date}</div>
             </div>
           </div>
           <div className="info-cell">
             <ClockIcon />
             <div>
               <div className="label">Time</div>
-              <div className="value">1:00 PM till late</div>
+              <div className="value">{c.time}</div>
             </div>
           </div>
           <div className="info-cell">
             <PinIcon />
             <div>
               <div className="label">Location</div>
-              <div className="value">Accra &middot; venue TBA</div>
+              <div className="value">{c.location}</div>
             </div>
           </div>
         </div>
         <div className="hero-actions">
           <a className="btn btn-primary" href="#rsvp">
-            RSVP — it&rsquo;s free
+            {c.primaryCta}
           </a>
           <a className="btn btn-ghost" href="#vip">
-            Reserve a VIP table
+            {c.secondaryCta}
           </a>
         </div>
       </div>
       <div className="marquee" aria-hidden="true">
         <div className="marquee-track">
-          <span>Music</span>
-          <span>Food</span>
-          <span>Vibes</span>
-          <span>Community</span>
-          <span>Music</span>
-          <span>Food</span>
-          <span>Vibes</span>
-          <span>Community</span>
+          {[...words, ...words].map((w, i) => (
+            <span key={i}>{w}</span>
+          ))}
         </div>
       </div>
     </header>

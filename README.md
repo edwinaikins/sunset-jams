@@ -35,6 +35,7 @@ openssl rand -base64 32
   - `/admin/rsvps` — guest list, search, check-in toggle, CSV export
   - `/admin/bookings` — VIP table / vendor / sponsor requests, approve/decline, CSV export
   - `/admin/messages` — contact inbox, mark read/unread, CSV export
+  - `/admin/content` — edit the public page's wording, images, links and lists; changes go live on save
 
 ## Environment variables
 

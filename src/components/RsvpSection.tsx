@@ -1,10 +1,11 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import type { SiteContent } from "@/lib/content";
 
 type Status = "idle" | "pending" | "ok" | "err";
 
-export default function RsvpSection() {
+export default function RsvpSection({ c }: { c: SiteContent["rsvp"] }) {
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState("");
 
@@ -43,14 +44,12 @@ export default function RsvpSection() {
     <section className="rsvp-section" id="rsvp">
       <div className="wrap">
         <div className="section-head">
-          <h2>RSVP — it&rsquo;s free</h2>
-          <p>Let us know you&rsquo;re coming so we can plan the day around you. No ticket, no charge.</p>
+          <h2>{c.heading}</h2>
+          <p>{c.intro}</p>
         </div>
         <div className="form-card">
           {status === "ok" ? (
-            <p className="form-status ok">
-              You&rsquo;re on the list! Screenshot this or watch @sunsetjamsgh for updates before 6 December.
-            </p>
+<p className="form-status ok">{c.success}</p>
           ) : (
             <form onSubmit={onSubmit}>
               <div className="form-grid two">
@@ -77,9 +76,9 @@ export default function RsvpSection() {
               </div>
               <div className="form-foot">
                 <button className="btn btn-primary" type="submit" disabled={status === "pending"}>
-                  {status === "pending" ? "Sending…" : "Confirm my RSVP"}
+                  {status === "pending" ? "Sending…" : c.buttonLabel}
                 </button>
-                <p className="form-note">We&rsquo;ll never share your info or spam you.</p>
+                {c.note && <p className="form-note">{c.note}</p>}
               </div>
               {status === "err" && <p className="admin-field-error">{error}</p>}
             </form>

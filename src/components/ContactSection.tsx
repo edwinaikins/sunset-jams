@@ -1,10 +1,11 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import type { SiteContent } from "@/lib/content";
 
 type Status = "idle" | "pending" | "ok" | "err";
 
-export default function ContactSection() {
+export default function ContactSection({ c }: { c: SiteContent["contact"] }) {
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState("");
 
@@ -42,12 +43,12 @@ export default function ContactSection() {
     <section className="contact-section" id="contact">
       <div className="wrap">
         <div className="section-head">
-          <h2>Get in touch</h2>
-          <p>Press, collabs, or just a question — drop us a line and we&rsquo;ll get back to you.</p>
+          <h2>{c.heading}</h2>
+          <p>{c.intro}</p>
         </div>
         <div className="form-card">
           {status === "ok" ? (
-            <p className="form-status ok">Message sent — thanks! We&rsquo;ll reply as soon as we can.</p>
+            <p className="form-status ok">{c.success}</p>
           ) : (
             <form onSubmit={onSubmit}>
               <div className="form-grid two">
@@ -70,7 +71,7 @@ export default function ContactSection() {
               </div>
               <div className="form-foot">
                 <button className="btn btn-primary" type="submit" disabled={status === "pending"}>
-                  {status === "pending" ? "Sending…" : "Send message"}
+                  {status === "pending" ? "Sending…" : c.buttonLabel}
                 </button>
               </div>
               {status === "err" && <p className="admin-field-error">{error}</p>}

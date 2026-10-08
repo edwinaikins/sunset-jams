@@ -7,6 +7,7 @@ const TABS = [
   { href: "/admin/rsvps", label: "RSVPs" },
   { href: "/admin/bookings", label: "VIP & Bookings" },
   { href: "/admin/messages", label: "Messages" },
+  { href: "/admin/content", label: "Site content" },
 ];
 
 export default function AdminTopbar() {

@@ -63,13 +63,23 @@ const SCHEMA_SQL = `
     is_read BOOLEAN NOT NULL DEFAULT false,
     created_at TIMESTAMPTZ NOT NULL DEFAULT now()
   );
+
+  CREATE TABLE IF NOT EXISTS site_content (
+    key TEXT PRIMARY KEY,
+    value JSONB NOT NULL,
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
+  );
 `;
 
 export async function ensureSchema(): Promise<void> {
   if (!global.__sjSchemaReady) {
     global.__sjSchemaReady = getPool()
       .query(SCHEMA_SQL)
-      .then(() => undefined);
+      .then(() => undefined)
+      .catch((err) => {
+        global.__sjSchemaReady = undefined;
+        throw err;
+      });
   }
   return global.__sjSchemaReady;
 }

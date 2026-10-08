@@ -25,6 +25,7 @@ export default function SiteNav({ c }: { c: SiteContent["nav"] }) {
       <div className="nav-links">
         <a href="#why">Why</a>
         <a href="#about">About</a>
+        <a href="#tables">Tables</a>
         <a href="#details">Details</a>
         <a href="#contact">Contact</a>
       </div>

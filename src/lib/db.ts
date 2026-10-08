@@ -54,6 +54,8 @@ const SCHEMA_SQL = `
     created_at TIMESTAMPTZ NOT NULL DEFAULT now()
   );
 
+  ALTER TABLE bookings ADD COLUMN IF NOT EXISTS package TEXT;
+
   CREATE TABLE IF NOT EXISTS messages (
     id SERIAL PRIMARY KEY,
     name TEXT NOT NULL,
@@ -111,6 +113,7 @@ export type BookingRow = {
   phone: string | null;
   party_size: number;
   booking_type: string;
+  package: string | null;
   message: string | null;
   status: string;
   created_at: string;

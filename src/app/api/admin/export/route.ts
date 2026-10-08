@@ -22,7 +22,7 @@ function toCsv(rows: Record<string, any>[]): string {
 const TABLES: Record<string, string> = {
   rsvps: "SELECT id, name, email, phone, guests, notes, checked_in, created_at FROM rsvps ORDER BY created_at DESC",
   bookings:
-    "SELECT id, name, email, phone, party_size, booking_type, status, message, created_at FROM bookings ORDER BY created_at DESC",
+    "SELECT id, name, email, phone, party_size, booking_type, package, status, message, created_at FROM bookings ORDER BY created_at DESC",
   messages: "SELECT id, name, email, subject, message, is_read, created_at FROM messages ORDER BY created_at DESC",
 };
 

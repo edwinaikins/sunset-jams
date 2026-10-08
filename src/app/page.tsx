@@ -8,6 +8,7 @@ import FeaturesSection from "@/components/FeaturesSection";
 import RsvpSection from "@/components/RsvpSection";
 import SaveSection from "@/components/SaveSection";
 import VipSection from "@/components/VipSection";
+import TablePackagesSection from "@/components/TablePackagesSection";
 import DetailsSection from "@/components/DetailsSection";
 import ContactSection from "@/components/ContactSection";
 import SiteFooter from "@/components/SiteFooter";
@@ -34,7 +35,8 @@ export default async function HomePage() {
         <FeaturesSection c={c.features} />
         <RsvpSection c={c.rsvp} />
         <SaveSection c={c.save} />
-        <VipSection c={c.vip} />
+        <TablePackagesSection c={c.packages} />
+        <VipSection c={c.vip} packages={c.packages} />
         <DetailsSection c={c.details} />
         <ContactSection c={c.contact} />
       </main>

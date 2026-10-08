@@ -5,6 +5,7 @@
 export type Phase = { num: string; title: string; time: string; strong: string };
 export type Reason = { num: string; title: string; body: string };
 export type Feature = { title: string; body: string };
+export type TablePackage = { price: string; drinks: string; mixers: string };
 
 export type SiteContent = {
   meta: { title: string; description: string };
@@ -49,6 +50,22 @@ export type SiteContent = {
     tagStrong: string;
   };
   vip: { heading: string; intro: string; buttonLabel: string; note: string; success: string };
+  packages: {
+    eyebrow: string;
+    heading: string;
+    headingScript: string;
+    intro: string;
+    currency: string;
+    bookLabel: string;
+    phoneLabel: string;
+    phones: string;
+    ballersName: string;
+    ballers: TablePackage[];
+    kingsName: string;
+    kings: TablePackage[];
+    queensName: string;
+    queens: TablePackage[];
+  };
   details: {
     eyebrow: string;
     heading: string;
@@ -180,6 +197,36 @@ export const DEFAULT_CONTENT: SiteContent = {
     buttonLabel: "Send request",
     note: "This isn’t a payment — it’s a request. We’ll confirm details with you directly.",
     success: "Request received. We’ll reach out on the contact details you gave us to confirm availability.",
+  },
+  packages: {
+    eyebrow: "Table packages",
+    heading: "Pick your table.",
+    headingScript: "Own the night.",
+    intro: "Three tiers, bottles and mixers included. Tap a package to request it and we’ll call to confirm.",
+    currency: "",
+    bookLabel: "Book this table",
+    phoneLabel: "For enquiries & bookings",
+    phones: "057 208 0475 / 054 634 5449",
+    ballersName: "Sunset Ballers",
+    ballers: [
+      { price: "5K", drinks: "Hennessy VS 1\nChampagne VDV 4", mixers: "Coke 5 | Red Bull 5 | Water 5" },
+      { price: "7K", drinks: "Hennessy VSOP 1\nChampagne VDV 5", mixers: "Coke 5 | Red Bull 5 | Water 5" },
+      { price: "10K", drinks: "Casamigos 1\nHennessy VSOP 1\nMoët 1", mixers: "Coke 5 | Red Bull 5 | Water 5" },
+      { price: "15K", drinks: "Hennessy VSOP 2\nMoët 1\nBelaire 2\nCasamigos 1", mixers: "Coke 5 | Red Bull 5 | Water 5" },
+      { price: "20K", drinks: "Azul 1\nMoët 1\nHennessy VSOP 2\nBelaire 2", mixers: "Coke 5 | Red Bull 5 | Water 5" },
+    ],
+    kingsName: "Sunset Kings",
+    kings: [
+      { price: "1K", drinks: "Red Label 1\nVDV Champagne 1", mixers: "Coke 1 | Red Bull 1 | Water 1" },
+      { price: "2K", drinks: "Black Label 1\nChampagne 2", mixers: "Coke 2 | Red Bull 2 | Water 2" },
+      { price: "3K", drinks: "Hennessy VS 1\nChampagne 2", mixers: "Coke 3 | Red Bull 3 | Water 3" },
+    ],
+    queensName: "Sunset Queens",
+    queens: [
+      { price: "1K", drinks: "VDV Champagne 1\nXXL Wine 1", mixers: "Coke 1 | Red Bull 1 | Water 1" },
+      { price: "2K", drinks: "VDV Champagne 2\nXXL Wine 2", mixers: "Coke 2 | Red Bull 2 | Water 2" },
+      { price: "3K", drinks: "VDV Champagne 3\nXXL Wine 3", mixers: "Coke 3 | Red Bull 3 | Water 3" },
+    ],
   },
   details: {
     eyebrow: "The details",
@@ -366,6 +413,42 @@ export const SECTIONS: SectionSpec[] = [
     ],
   },
   {
+    key: "packages",
+    title: "Table packages",
+    description: "The three tiers of table packages and the enquiry phone numbers.",
+    fields: [
+      t("eyebrow", "Small label"),
+      t("heading", "Heading"),
+      t("headingScript", "Heading (handwritten part)"),
+      ta("intro", "Intro"),
+      t("currency", "Currency (optional)", "Shown before every price, e.g. GH₵. Leave empty to show prices exactly as typed."),
+      t("bookLabel", "Book button label"),
+      t("phoneLabel", "Phone strip label"),
+      t("phones", "Phone numbers", "Separate numbers with / — each becomes a tap-to-call and WhatsApp link."),
+      t("ballersName", "Tier 1 name (gold)"),
+      { key: "ballers", label: "Tier 1 packages", kind: "list", itemLabel: "Package", max: 8,
+        fields: [
+          t("price", "Price", "e.g. 5K"),
+          ta("drinks", "Bottles", "One per line, with the quantity at the end — e.g. Hennessy VS 1"),
+          t("mixers", "Mixers", "Separate with | — e.g. Coke 5 | Red Bull 5 | Water 5"),
+        ], },
+      t("kingsName", "Tier 2 name (red)"),
+      { key: "kings", label: "Tier 2 packages", kind: "list", itemLabel: "Package", max: 8,
+        fields: [
+          t("price", "Price", "e.g. 5K"),
+          ta("drinks", "Bottles", "One per line, with the quantity at the end — e.g. Hennessy VS 1"),
+          t("mixers", "Mixers", "Separate with | — e.g. Coke 5 | Red Bull 5 | Water 5"),
+        ], },
+      t("queensName", "Tier 3 name (pink)"),
+      { key: "queens", label: "Tier 3 packages", kind: "list", itemLabel: "Package", max: 8,
+        fields: [
+          t("price", "Price", "e.g. 5K"),
+          ta("drinks", "Bottles", "One per line, with the quantity at the end — e.g. Hennessy VS 1"),
+          t("mixers", "Mixers", "Separate with | — e.g. Coke 5 | Red Bull 5 | Water 5"),
+        ], },
+    ],
+  },
+  {
     key: "vip",
     title: "VIP & vendor form",
     description: "Wording around the booking form.",
@@ -470,4 +553,51 @@ export function safeUrl(url: string): string {
   if (v.startsWith("/") && !v.startsWith("//")) return v;
   if (/^https?:\/\//i.test(v)) return v;
   return "";
+}
+
+// "Hennessy VS 1" -> { name: "Hennessy VS", qty: "1" }
+export function splitQty(line: string): { name: string; qty: string } {
+  const m = line.trim().match(/^(.*?)\s+[x×]?(\d+)$/i);
+  return m ? { name: m[1], qty: m[2] } : { name: line.trim(), qty: "" };
+}
+
+export function lines(text: string): string[] {
+  return text
+    .split(/\n/)
+    .map((l) => l.trim())
+    .filter(Boolean);
+}
+
+// "057 208 0475 / 054 634 5449" -> tel + WhatsApp links (Ghana numbers starting 0 become +233).
+export function phoneLinks(text: string): { label: string; tel: string; wa: string }[] {
+  return text
+    .split(/[\/,]/)
+    .map((p) => p.trim())
+    .filter(Boolean)
+    .map((label) => {
+      let digits = label.replace(/[^\d+]/g, "");
+      if (digits.startsWith("+")) digits = digits.slice(1);
+      else if (digits.startsWith("0")) digits = "233" + digits.slice(1);
+      return { label, tel: `+${digits}`, wa: `https://wa.me/${digits}` };
+    })
+    .filter((p) => p.tel.length > 6);
+}
+
+export type PackageOption = { tier: string; value: string; label: string };
+
+export function packageOptions(c: SiteContent["packages"]): PackageOption[] {
+  const tiers: [string, TablePackage[]][] = [
+    [c.ballersName, c.ballers],
+    [c.kingsName, c.kings],
+    [c.queensName, c.queens],
+  ];
+  const out: PackageOption[] = [];
+  for (const [tier, list] of tiers) {
+    for (const p of list) {
+      if (!p.price.trim()) continue;
+      const price = `${c.currency ? c.currency + " " : ""}${p.price.trim()}`;
+      out.push({ tier, value: `${tier} · ${price}`, label: `${price} table` });
+    }
+  }
+  return out;
 }

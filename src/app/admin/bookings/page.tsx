@@ -7,7 +7,7 @@ export const dynamic = "force-dynamic";
 async function getData() {
   await ensureSchema();
   const { rows } = await getPool().query(
-    `SELECT id, name, email, phone, party_size, booking_type, message, status, created_at FROM bookings ORDER BY created_at DESC`
+    `SELECT id, name, email, phone, party_size, booking_type, package, message, status, created_at FROM bookings ORDER BY created_at DESC`
   );
   return rows.map((r: any) => ({
     ...r,

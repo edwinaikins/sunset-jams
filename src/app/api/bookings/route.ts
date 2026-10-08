@@ -21,6 +21,7 @@ export async function POST(req: NextRequest) {
   const email = String(body?.email || "").trim().slice(0, 160);
   const phone = String(body?.phone || "").trim().slice(0, 40);
   const message = String(body?.message || "").trim().slice(0, 800);
+  const pkg = String(body?.package || "").trim().slice(0, 120);
   let bookingType = String(body?.booking_type || "vip_table");
   if (!VALID_TYPES.has(bookingType)) bookingType = "vip_table";
   let partySize = Number(body?.party_size);
@@ -36,9 +37,9 @@ export async function POST(req: NextRequest) {
   try {
     await ensureSchema();
     await getPool().query(
-      `INSERT INTO bookings (name, email, phone, party_size, booking_type, message, status)
-       VALUES ($1, $2, $3, $4, $5, $6, 'pending')`,
-      [name, email || null, phone, partySize, bookingType, message || null]
+      `INSERT INTO bookings (name, email, phone, party_size, booking_type, package, message, status)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, 'pending')`,
+      [name, email || null, phone, partySize, bookingType, bookingType === "vip_table" ? pkg || null : null, message || null]
     );
     return NextResponse.json({ ok: true });
   } catch (err) {

@@ -87,7 +87,7 @@ export default function Hero({ c }: { c: SiteContent["hero"] }) {
           <a className="btn btn-primary" href="#rsvp">
             {c.primaryCta}
           </a>
-          <a className="btn btn-ghost" href="#vip">
+          <a className="btn btn-ghost" href="#tables">
             {c.secondaryCta}
           </a>
         </div>

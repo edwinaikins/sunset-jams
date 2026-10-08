@@ -9,6 +9,7 @@ export type BookingRowClient = {
   phone: string | null;
   party_size: number;
   booking_type: string;
+  package: string | null;
   message: string | null;
   status: "pending" | "approved" | "declined" | string;
   created_at: string;
@@ -119,7 +120,10 @@ export default function BookingsTable({ initialRows }: { initialRows: BookingRow
                     {r.phone}
                     {r.email ? <div className="muted">{r.email}</div> : null}
                   </td>
-                  <td>{TYPE_LABEL[r.booking_type] || r.booking_type}</td>
+                  <td>
+                    {TYPE_LABEL[r.booking_type] || r.booking_type}
+                    {r.package ? <div className="muted">{r.package}</div> : null}
+                  </td>
                   <td>{r.party_size}</td>
                   <td className="muted" style={{ maxWidth: 240 }}>
                     {r.message || "—"}

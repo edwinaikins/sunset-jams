@@ -36,6 +36,7 @@ openssl rand -base64 32
   - `/admin/bookings` — VIP table / vendor / sponsor requests, approve/decline, CSV export
   - `/admin/messages` — contact inbox, mark read/unread, CSV export
   - `/admin/content` — edit the public page's wording, images, links and lists; changes go live on save
+    (images can be uploaded there: JPEG/PNG/WebP/GIF up to 4 MB, stored in Postgres and served from `/media/<id>`)
 
 ## Environment variables
 

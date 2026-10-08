@@ -214,7 +214,7 @@ export const DEFAULT_CONTENT: SiteContent = {
 
 // ---------- Editor layout ----------
 
-export type TextField = { key: string; label: string; kind: "text" | "textarea" | "url"; hint?: string };
+export type TextField = { key: string; label: string; kind: "text" | "textarea" | "url" | "image"; hint?: string };
 export type ListField = {
   key: string;
   label: string;
@@ -227,11 +227,12 @@ export type ListField = {
 export type Field = TextField | ListField;
 export type SectionSpec = { key: keyof SiteContent; title: string; description: string; fields: Field[] };
 
+const IMAGE_HINT = "Upload an image, pick one you uploaded before, or paste a link.";
+
 const t = (key: string, label: string, hint?: string): TextField => ({ key, label, kind: "text", hint });
 const ta = (key: string, label: string, hint?: string): TextField => ({ key, label, kind: "textarea", hint });
 const u = (key: string, label: string, hint?: string): TextField => ({ key, label, kind: "url", hint });
-
-const IMAGE_HINT = "A path like /logo.png or a full https:// image link.";
+const im = (key: string, label: string): TextField => ({ key, label, kind: "image", hint: IMAGE_HINT });
 
 export const SECTIONS: SectionSpec[] = [
   {
@@ -257,9 +258,9 @@ export const SECTIONS: SectionSpec[] = [
     description: "The first thing visitors see.",
     fields: [
       t("eyebrow", "Small line above the logo"),
-      u("logoUrl", "Logo image", IMAGE_HINT),
+      im("logoUrl", "Logo image"),
       t("logoAlt", "Logo description (for screen readers)"),
-      u("backgroundUrl", "Background image", IMAGE_HINT),
+      im("backgroundUrl", "Background image"),
       t("subtitle", "Subtitle"),
       t("subtitleScript", "Subtitle (handwritten part)"),
       ta("line", "Intro line"),
@@ -314,7 +315,7 @@ export const SECTIONS: SectionSpec[] = [
       t("heading", "Heading"),
       t("headingScript", "Heading (handwritten part)"),
       ta("body", "Text", "Leave a blank line between paragraphs."),
-      u("imageUrl", "Flyer image", IMAGE_HINT),
+      im("imageUrl", "Flyer image"),
       t("imageAlt", "Flyer description"),
       t("tagSmall", "Flyer caption (small)"),
       t("tagStrong", "Flyer caption (bold)"),
@@ -358,7 +359,7 @@ export const SECTIONS: SectionSpec[] = [
       t("heading", "Heading"),
       t("headingScript", "Heading (handwritten part)"),
       ta("body", "Text", "Leave a blank line between paragraphs."),
-      u("imageUrl", "Poster image", IMAGE_HINT),
+      im("imageUrl", "Poster image"),
       t("imageAlt", "Poster description"),
       t("tagSmall", "Poster caption (small)"),
       t("tagStrong", "Poster caption (bold)"),

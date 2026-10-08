@@ -64,6 +64,15 @@ const SCHEMA_SQL = `
     created_at TIMESTAMPTZ NOT NULL DEFAULT now()
   );
 
+  CREATE TABLE IF NOT EXISTS media (
+    id TEXT PRIMARY KEY,
+    filename TEXT NOT NULL,
+    mime TEXT NOT NULL,
+    size INTEGER NOT NULL,
+    data BYTEA NOT NULL,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+  );
+
   CREATE TABLE IF NOT EXISTS site_content (
     key TEXT PRIMARY KEY,
     value JSONB NOT NULL,

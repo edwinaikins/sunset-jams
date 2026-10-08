@@ -639,3 +639,35 @@ table.admin-table td.muted { color: var(--ink-faint); }
 .ce-item-head strong { font-size: .86rem; }
 .ce-item-grid { display: grid; gap: 12px; }
 @media (min-width: 720px) { .ce-item-grid { grid-template-columns: 1fr 1fr; } .ce-item-grid .field:has(textarea) { grid-column: 1 / -1; } }
+
+/* Image fields + media library */
+.img-field { display: flex; gap: 16px; align-items: flex-start; flex-wrap: wrap; }
+.img-thumb {
+  width: 180px; height: 120px; flex: none;
+  border-radius: 10px; border: 1px solid var(--line-strong);
+  background:
+    repeating-conic-gradient(rgba(247,230,209,.05) 0 25%, transparent 0 50%) 0 0 / 16px 16px,
+    rgba(8, 10, 18, .4);
+  display: flex; align-items: center; justify-content: center; overflow: hidden;
+}
+.img-thumb img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; }
+.img-thumb span { color: var(--ink-faint); font-size: .78rem; }
+.img-controls { flex: 1; min-width: 220px; display: flex; flex-direction: column; gap: 10px; }
+.mini-btn.primary { color: #1a0e08; border-color: transparent; background: linear-gradient(100deg, var(--accent-3), var(--accent) 60%, var(--accent-2)); }
+.mini-btn.primary:hover { color: #1a0e08; filter: brightness(1.08); }
+.ce-hint.ok { color: var(--good); }
+.ce-hint.err { color: var(--bad); }
+.media-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 10px;
+  margin-top: 6px; padding: 12px; border-radius: 12px;
+  border: 1px solid var(--line); background: rgba(8, 10, 18, .3);
+  max-height: 340px; overflow-y: auto;
+}
+.media-tile { border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: var(--bg-raised-2); }
+.media-tile.selected { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+.media-pick { display: block; width: 100%; aspect-ratio: 4 / 3; padding: 0; border: 0; background: rgba(8,10,18,.4); cursor: pointer; }
+.media-pick img { width: 100%; height: 100%; object-fit: contain; }
+.media-meta { display: flex; align-items: center; gap: 6px; padding: 5px 8px; font-size: .7rem; color: var(--ink-dim); }
+.media-meta span { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.media-del { border: 0; background: none; color: var(--ink-faint); cursor: pointer; font-size: .8rem; padding: 2px; }
+.media-del:hover { color: var(--bad); }

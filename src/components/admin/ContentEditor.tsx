@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { DEFAULT_CONTENT, SECTIONS, SiteContent, TextField, ListField, SectionSpec } from "@/lib/content";
+import ImageField from "./ImageField";
 
 type Status = { kind: "idle" | "saving" | "saved" | "error"; message?: string };
 type Row = Record<string, string>;
@@ -156,8 +157,9 @@ function FieldInput({
   value: string;
   onChange: (v: string) => void;
 }) {
-  const isImage = spec.kind === "url" && /image|logo|flyer|poster/i.test(spec.label);
-  const preview = isImage && (value.startsWith("/") || /^https?:\/\//.test(value)) ? value : "";
+  if (spec.kind === "image") {
+    return <ImageField id={id} label={spec.label} hint={spec.hint} value={value} onChange={onChange} />;
+  }
   return (
     <div className="field ce-field">
       <label htmlFor={id}>{spec.label}</label>
@@ -167,10 +169,6 @@ function FieldInput({
         <input id={id} type="text" inputMode={spec.kind === "url" ? "url" : undefined} value={value} onChange={(e) => onChange(e.target.value)} />
       )}
       {spec.hint && <span className="ce-hint">{spec.hint}</span>}
-      {preview && (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img className="ce-preview" src={preview} alt="" />
-      )}
     </div>
   );
 }

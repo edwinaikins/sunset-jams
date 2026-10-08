@@ -8,9 +8,11 @@ declare global {
 }
 
 function createPool(): Pool {
-  const connectionString = process.env.DATABASE_URL;
+  // Vercel's Neon integration may expose the pooled URL as POSTGRES_URL
+  // instead of (or as well as) DATABASE_URL, so accept either.
+  const connectionString = process.env.DATABASE_URL || process.env.POSTGRES_URL;
   if (!connectionString) {
-    throw new Error("DATABASE_URL is not set");
+    throw new Error("DATABASE_URL (or POSTGRES_URL) is not set");
   }
   return new Pool({
     connectionString,

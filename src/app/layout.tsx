@@ -4,7 +4,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Sunset Jams Vol. 1 — The Homecoming",
   description:
-    "Sunset Jams Vol. 1: The Homecoming — Jam Grove Entertainment's all-new open-air experience. Sunday, 6 December 2026, 1:00 PM till late, Accra. RSVP free.",
+    "Sunset Jams Vol. 1: The Homecoming — JamGrove Entertainment's all-new open-air experience. Sunday, 6 December 2026, 1:00 PM till late, Mary Villas Event Centre, Accra. RSVP free.",
   icons: { icon: "/logo.png" },
 };
 

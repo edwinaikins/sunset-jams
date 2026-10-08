@@ -96,16 +96,16 @@ export const DEFAULT_CONTENT: SiteContent = {
   meta: {
     title: "Sunset Jams Vol. 1 — The Homecoming",
     description:
-      "Sunset Jams Vol. 1: The Homecoming — Jam Grove Entertainment's all-new open-air experience. Sunday, 6 December 2026, 1:00 PM till late, Accra. RSVP free.",
+      "Sunset Jams Vol. 1: The Homecoming — JamGrove Entertainment's all-new open-air experience. Sunday, 6 December 2026, 1:00 PM till late, Mary Villas Event Centre, Accra. RSVP free.",
   },
   nav: {
     brandMark: "JG",
-    brandName: "JAM GROVE ENTERTAINMENT",
+    brandName: "JAMGROVE ENTERTAINMENT",
     brandSub: "Sunset Jams · Vol. 1",
     ctaLabel: "RSVP free",
   },
   hero: {
-    eyebrow: "Jam Grove Entertainment presents · The all-new open-air experience",
+    eyebrow: "JamGrove Entertainment presents · The all-new open-air experience",
     logoUrl: "/logo.png",
     logoAlt: "Sunset Jams — where sunset meets the sound",
     backgroundUrl: "/hero-bg.jpg",
@@ -114,7 +114,7 @@ export const DEFAULT_CONTENT: SiteContent = {
     line: "Back to the roots. Back to the vibes. A day-to-night open-air experience of music, food and community, right here in Accra.",
     date: "Sun, 06 Dec 2026",
     time: "1:00 PM till late",
-    location: "Accra · venue TBA",
+    location: "Mary Villas Event Centre",
     primaryCta: "RSVP — it’s free",
     secondaryCta: "Reserve a VIP table",
     marquee: "Music, Food, Vibes, Community",
@@ -136,7 +136,7 @@ export const DEFAULT_CONTENT: SiteContent = {
       {
         num: "01",
         title: "It's a homecoming",
-        body: "Volume 1 brings Jam Grove back to the open-air format that started it all — back to the roots, back to the vibes, back to the people who've been asking for it.",
+        body: "Volume 1 brings JamGrove back to the open-air format that started it all — back to the roots, back to the vibes, back to the people who've been asking for it.",
       },
       {
         num: "02",
@@ -159,7 +159,7 @@ export const DEFAULT_CONTENT: SiteContent = {
     eyebrow: "You are invited",
     heading: "Where sunset",
     headingScript: "meets the sound.",
-    body: "Sunset Jams Vol. 1: The Homecoming is Jam Grove Entertainment’s all-new open-air experience — a full day-to-night gathering built around good music, delicious food, great people and energy that doesn’t quit.\n\nIt’s a homecoming in the truest sense: back to the roots, back to the vibes, back to the community that made the sound worth chasing in the first place.",
+    body: "Sunset Jams Vol. 1: The Homecoming is JamGrove Entertainment’s all-new open-air experience — a full day-to-night gathering built around good music, delicious food, great people and energy that doesn’t quit.\n\nIt’s a homecoming in the truest sense: back to the roots, back to the vibes, back to the community that made the sound worth chasing in the first place.",
     imageUrl: "/hero-poster.jpg",
     imageAlt: "Sunset Jams official flyer",
     tagSmall: "Official flyer",
@@ -185,11 +185,11 @@ export const DEFAULT_CONTENT: SiteContent = {
     eyebrow: "Save it, share it",
     heading: "Where sunset",
     headingScript: "meets the sound.",
-    body: "Screenshot the flyer, drop it in your group chat, tag whoever’s coming with you. The venue’s still under wraps, but the date is locked — Sunday, 6 December, from 1PM till late.",
+    body: "Screenshot the flyer, drop it in your group chat, tag whoever’s coming with you. The venue is set — Mary Villas Event Centre — and the date is locked: Sunday, 6 December, from 1PM till late.",
     imageUrl: "/cup-poster.jpg",
     imageAlt: "Sunset Jams — save the date",
     tagSmall: "Homecoming edition",
-    tagStrong: "Jam Grove",
+    tagStrong: "JamGrove",
   },
   vip: {
     heading: "VIP tables & vendor spots",
@@ -231,14 +231,14 @@ export const DEFAULT_CONTENT: SiteContent = {
   details: {
     eyebrow: "The details",
     heading: "Save the date.",
-    headingScript: "Venue drops soon.",
-    body: "We’re locking the exact spot in Accra now — everyone following @sunsetjamsgh will hear it first, well ahead of the 6th.",
+    headingScript: "Venue confirmed.",
+    body: "Sunset Jams Vol. 1 lands at Mary Villas Event Centre. Follow @sunsetjamsgh for directions, lineup and everything else before the 6th.",
     date: "Sunday, 06 December 2026",
     dateHint: "Mark it — this is a one-day event",
     time: "1:00 PM until late",
     timeHint: "Come for the sunset, stay well past it",
-    location: "Accra, Ghana",
-    locationHint: "Exact venue to be announced",
+    location: "Mary Villas Event Centre",
+    locationHint: "Accra, Ghana",
   },
   contact: {
     heading: "Get in touch",
@@ -249,12 +249,12 @@ export const DEFAULT_CONTENT: SiteContent = {
   footer: {
     heading: "Follow for",
     headingScript: "updates.",
-    intro: "Venue, lineup and everything else lands on these first.",
+    intro: "Lineup, directions and everything else lands on these first.",
     instagram: "https://instagram.com/sunsetjamsgh",
     facebook: "https://facebook.com/sunsetjamsgh",
     x: "https://x.com/sunsetjamsgh",
     tiktok: "https://tiktok.com/@sunsetjamsgh",
-    copyright: "© 2026 Jam Grove Entertainment · Sunset Jams Vol. 1",
+    copyright: "© 2026 JamGrove Entertainment · Sunset Jams Vol. 1",
     hashtag: "#SUNSETJAMS",
   },
 };
@@ -600,4 +600,33 @@ export function packageOptions(c: SiteContent["packages"]): PackageOption[] {
     }
   }
   return out;
+}
+
+// ---------- Updates applied to already-saved content ----------
+// Saved content overrides the defaults above, so wording changes that must reach
+// the live site are also applied here. Venue lines are only replaced while they
+// still hold the old default text, so anything edited in the admin is left alone.
+const VENUE_UPDATES: [string, string, string, string][] = [
+  ["meta", "description", "Sunset Jams Vol. 1: The Homecoming — Jam Grove Entertainment's all-new open-air experience. Sunday, 6 December 2026, 1:00 PM till late, Accra. RSVP free.", "Sunset Jams Vol. 1: The Homecoming — JamGrove Entertainment's all-new open-air experience. Sunday, 6 December 2026, 1:00 PM till late, Mary Villas Event Centre, Accra. RSVP free."],
+  ["hero", "location", "Accra · venue TBA", "Mary Villas Event Centre"],
+  ["save", "body", "Screenshot the flyer, drop it in your group chat, tag whoever’s coming with you. The venue’s still under wraps, but the date is locked — Sunday, 6 December, from 1PM till late.", "Screenshot the flyer, drop it in your group chat, tag whoever’s coming with you. The venue is set — Mary Villas Event Centre — and the date is locked: Sunday, 6 December, from 1PM till late."],
+  ["details", "headingScript", "Venue drops soon.", "Venue confirmed."],
+  ["details", "body", "We’re locking the exact spot in Accra now — everyone following @sunsetjamsgh will hear it first, well ahead of the 6th.", "Sunset Jams Vol. 1 lands at Mary Villas Event Centre. Follow @sunsetjamsgh for directions, lineup and everything else before the 6th."],
+  ["details", "location", "Accra, Ghana", "Mary Villas Event Centre"],
+  ["details", "locationHint", "Exact venue to be announced", "Accra, Ghana"],
+  ["footer", "intro", "Venue, lineup and everything else lands on these first.", "Lineup, directions and everything else lands on these first."],
+];
+
+function fixBrand(v: string) {
+  return v.replace(/Jam Grove/g, "JamGrove").replace(/JAM GROVE/g, "JAMGROVE").replace(/jam grove/g, "jamgrove");
+}
+
+export function applyContentUpdates(c: SiteContent): SiteContent {
+  const out = JSON.parse(JSON.stringify(c)) as any;
+  for (const [section, key, oldText, newText] of VENUE_UPDATES) {
+    if (out[section]?.[key] === oldText) out[section][key] = newText;
+  }
+  const walk = (v: any): any =>
+    typeof v === "string" ? fixBrand(v) : Array.isArray(v) ? v.map(walk) : v && typeof v === "object" ? Object.fromEntries(Object.entries(v).map(([k, x]) => [k, walk(x)])) : v;
+  return walk(out) as SiteContent;
 }

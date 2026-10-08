@@ -1,5 +1,5 @@
 import { ensureSchema, getPool } from "@/lib/db";
-import { DEFAULT_CONTENT, SiteContent, normaliseContent } from "@/lib/content";
+import { DEFAULT_CONTENT, SiteContent, applyContentUpdates, normaliseContent } from "@/lib/content";
 
 const KEY = "site";
 
@@ -10,7 +10,7 @@ export async function getSiteContent(): Promise<SiteContent> {
     await ensureSchema();
     const { rows } = await getPool().query(`SELECT value FROM site_content WHERE key = $1`, [KEY]);
     if (rows.length === 0) return DEFAULT_CONTENT;
-    return normaliseContent(rows[0].value);
+    return applyContentUpdates(normaliseContent(rows[0].value));
   } catch (err) {
     console.error("Could not load site content; using defaults", err);
     return DEFAULT_CONTENT;

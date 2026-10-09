@@ -228,15 +228,25 @@ header.hero {
   background: linear-gradient(100deg, var(--accent-3), var(--accent) 55%, var(--accent-2));
   box-shadow: 0 -12px 30px -18px rgba(0, 0, 0, .5);
 }
-.marquee-track { display: flex; width: max-content; animation: marqueeScroll 26s linear infinite; }
-.marquee-track span {
-  display: flex; align-items: center; gap: .6em;
-  padding: 10px 0;
+.marquee-track { display: flex; width: max-content; animation: marqueeScroll 40s linear infinite; }
+.marquee-group {
+  display: flex; align-items: center; justify-content: space-around;
+  flex-shrink: 0; min-width: 100vw;
+}
+.marquee-item {
+  display: inline-flex; align-items: center;
+  padding: 11px 0;
   font-family: 'Unbounded', sans-serif;
   font-weight: 700; font-size: .85rem; letter-spacing: .14em; text-transform: uppercase;
   color: #1a0e08; white-space: nowrap;
 }
-.marquee-track span::after { content: "◆"; font-size: .55em; opacity: .6; margin: 0 .8em; }
+.marquee-sep {
+  display: inline-block; flex: none;
+  width: 6px; height: 6px; margin: 0 1.6em;
+  background: currentColor; opacity: .55;
+  transform: rotate(45deg);
+}
+.marquee:hover .marquee-track { animation-play-state: paused; }
 @keyframes marqueeScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
 /* ---------- SHARED SECTION LAYOUT ---------- */

@@ -20,6 +20,9 @@ export default function Hero({ c }: { c: SiteContent["hero"] }) {
     .split(",")
     .map((w) => w.trim())
     .filter(Boolean);
+  // Repeat the words so one copy is always wider than the screen; two identical
+  // copies then loop seamlessly with no gap or jump.
+  const group = words.length ? Array.from({ length: Math.ceil(12 / words.length) }, () => words).flat() : [];
   const bg = safeUrl(c.backgroundUrl);
   const logo = safeUrl(c.logoUrl);
   return (
@@ -94,8 +97,15 @@ export default function Hero({ c }: { c: SiteContent["hero"] }) {
       </div>
       <div className="marquee" aria-hidden="true">
         <div className="marquee-track">
-          {[...words, ...words].map((w, i) => (
-            <span key={i}>{w}</span>
+          {[0, 1].map((g) => (
+            <div className="marquee-group" key={g}>
+              {group.map((w, i) => (
+                <span className="marquee-item" key={i}>
+                  {w}
+                  <i className="marquee-sep" />
+                </span>
+              ))}
+            </div>
           ))}
         </div>
       </div>

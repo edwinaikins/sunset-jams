@@ -12,6 +12,7 @@ import TablePackagesSection from "@/components/TablePackagesSection";
 import DetailsSection from "@/components/DetailsSection";
 import ContactSection from "@/components/ContactSection";
 import SiteFooter from "@/components/SiteFooter";
+import SponsorsSection from "@/components/SponsorsSection";
 import { getSiteContent } from "@/lib/content-store";
 
 // Content is edited from /admin/content, so render on every request.
@@ -39,6 +40,7 @@ export default async function HomePage() {
         <VipSection c={c.vip} packages={c.packages} />
         <DetailsSection c={c.details} />
         <ContactSection c={c.contact} />
+        <SponsorsSection c={c.sponsors} />
       </main>
       <SiteFooter c={c.footer} />
     </>

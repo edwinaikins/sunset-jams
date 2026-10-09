@@ -6,6 +6,7 @@ export type Phase = { num: string; title: string; time: string; strong: string }
 export type Reason = { num: string; title: string; body: string };
 export type Feature = { title: string; body: string };
 export type TablePackage = { price: string; drinks: string; mixers: string };
+export type Sponsor = { name: string; logoUrl: string; link: string };
 
 export type SiteContent = {
   meta: { title: string; description: string };
@@ -79,6 +80,17 @@ export type SiteContent = {
     locationHint: string;
   };
   contact: { heading: string; intro: string; buttonLabel: string; success: string };
+  sponsors: {
+    eyebrow: string;
+    heading: string;
+    headingScript: string;
+    poweredLabel: string;
+    powered: Sponsor[];
+    supportedLabel: string;
+    supported: Sponsor[];
+    partnersLabel: string;
+    partners: Sponsor[];
+  };
   footer: {
     heading: string;
     headingScript: string;
@@ -245,6 +257,23 @@ export const DEFAULT_CONTENT: SiteContent = {
     intro: "Press, collabs, or just a question — drop us a line and we’ll get back to you.",
     buttonLabel: "Send message",
     success: "Message sent — thanks! We’ll reply as soon as we can.",
+  },
+  sponsors: {
+    eyebrow: "Sponsors & partners",
+    heading: "Brought to you",
+    headingScript: "by the best.",
+    poweredLabel: "Powered by",
+    powered: [{ name: "Veuve du Vernay", logoUrl: "/sponsors/veuve-du-vernay.webp", link: "" }],
+    supportedLabel: "Supported by",
+    supported: [{ name: "Hennessy", logoUrl: "/sponsors/hennessy.webp", link: "" }],
+    partnersLabel: "Our partners",
+    partners: [
+      { name: "Africa Fitness Honors", logoUrl: "/sponsors/africa-fitness-honors.webp", link: "" },
+      { name: "Monin", logoUrl: "/sponsors/monin.webp", link: "" },
+      { name: "Billz Official", logoUrl: "/sponsors/billz-official.webp", link: "" },
+      { name: "Ascorbic Concepts", logoUrl: "/sponsors/ascorbic-concepts.webp", link: "" },
+      { name: "Wild Nite", logoUrl: "/sponsors/wild-nite.webp", link: "" },
+    ],
   },
   footer: {
     heading: "Follow for",
@@ -482,6 +511,22 @@ export const SECTIONS: SectionSpec[] = [
     title: "Contact form",
     description: "Wording around the contact form.",
     fields: [t("heading", "Heading"), ta("intro", "Intro"), t("buttonLabel", "Button label"), ta("success", "Message after sending")],
+  },
+  {
+    key: "sponsors",
+    title: "Sponsors & partners",
+    description: "Sponsor logos, grouped as on the flyer. Logos look best on a black background.",
+    fields: [
+      t("eyebrow", "Small label"),
+      t("heading", "Heading"),
+      t("headingScript", "Heading (handwritten part)"),
+      t("poweredLabel", "Group 1 label"),
+      { key: "powered", label: "Group 1 sponsors", kind: "list", itemLabel: "Sponsor", max: 4, fields: [t("name", "Name"), im("logoUrl", "Logo"), u("link", "Website link (optional)", "Makes the logo clickable.")] },
+      t("supportedLabel", "Group 2 label"),
+      { key: "supported", label: "Group 2 sponsors", kind: "list", itemLabel: "Sponsor", max: 4, fields: [t("name", "Name"), im("logoUrl", "Logo"), u("link", "Website link (optional)", "Makes the logo clickable.")] },
+      t("partnersLabel", "Group 3 label"),
+      { key: "partners", label: "Group 3 sponsors", kind: "list", itemLabel: "Sponsor", max: 16, fields: [t("name", "Name"), im("logoUrl", "Logo"), u("link", "Website link (optional)", "Makes the logo clickable.")] },
+    ],
   },
   {
     key: "footer",

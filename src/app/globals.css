@@ -885,3 +885,55 @@ table.admin-table td.muted { color: var(--ink-faint); }
 .pkg-picked a { font-size: .8rem; color: var(--ink-dim); }
 table.admin-table div.muted { color: var(--ink-faint); font-size: .8rem; margin-top: 3px; }
 section[id] { scroll-margin-top: 72px; }
+
+/* ---------- SPONSORS ---------- */
+.sponsors-section { position: relative; }
+.sponsors-head { text-align: center; margin-bottom: clamp(28px, 4vw, 44px); }
+.sponsors-head .eyebrow { display: block; margin-bottom: 10px; }
+.sponsors-head h2 { font-size: clamp(1.8rem, 4vw, 2.5rem); }
+.sponsors-head .script { color: var(--accent-2); }
+.sponsor-top { display: grid; grid-template-columns: 1fr; gap: 16px; margin-bottom: 16px; }
+@media (min-width: 700px) { .sponsor-top { grid-template-columns: 1fr 1fr; } }
+.sponsor-group {
+  display: flex; flex-direction: column; align-items: center; gap: 14px;
+  padding: 20px 18px 22px;
+  border-radius: 20px;
+  background: linear-gradient(180deg, rgba(255, 198, 10, .06), rgba(0, 0, 0, .35));
+  border: 1px solid rgba(255, 198, 10, .22);
+}
+.sponsor-label {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: .68rem; font-weight: 800; letter-spacing: .26em; text-transform: uppercase; color: var(--accent-2);
+}
+.sponsor-label::before, .sponsor-label::after { content: ""; width: 26px; height: 1px; background: linear-gradient(90deg, transparent, var(--accent-2)); }
+.sponsor-label::after { transform: scaleX(-1); }
+.sponsor-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; width: 100%; }
+.sponsor-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; width: 100%; }
+@media (min-width: 640px) { .sponsor-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 980px) { .sponsor-grid { grid-template-columns: repeat(5, 1fr); } }
+.sponsor-tile {
+  display: flex; align-items: center; justify-content: center;
+  background: #000;
+  border: 1px solid rgba(247, 230, 209, .1);
+  border-radius: 14px;
+  padding: 14px;
+  transition: border-color .2s, transform .2s, box-shadow .2s;
+  text-decoration: none;
+}
+.sponsor-tile.lg { height: 150px; width: min(100%, 300px); }
+.sponsor-tile.sm { height: 110px; }
+.sponsor-tile img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; }
+a.sponsor-tile:hover, .sponsor-tile:hover { border-color: rgba(255, 198, 10, .5); transform: translateY(-2px); box-shadow: 0 12px 30px -16px rgba(255, 198, 10, .45); }
+.sponsor-name { color: var(--ink); font-weight: 800; font-size: .95rem; text-align: center; }
+
+/* Captions sit under the flyer (not over it) so the flyer's own details stay readable */
+.poster-tag {
+  position: static;
+  background: var(--bg-raised);
+  border-top: 1px solid var(--line);
+}
+/* Partner logos: centred rows so a leftover logo doesn't sit alone at the edge */
+.sponsor-grid { display: flex; flex-wrap: wrap; justify-content: center; }
+.sponsor-grid .sponsor-tile { flex: 0 0 calc(50% - 6px); }
+@media (min-width: 640px) { .sponsor-grid .sponsor-tile { flex-basis: calc(33.333% - 8px); } }
+@media (min-width: 980px) { .sponsor-grid .sponsor-tile { flex-basis: calc(20% - 10px); } }
